@@ -25,7 +25,7 @@ SECRET_KEY = '2wr$r=3i#sq4w7m$$er8u0i@frvhi%xf&&ej_@i-8$8)x3i^*2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.codenvy.io']
+ALLOWED_HOSTS = ['.codenvy.io','.vfs.cloud9.us-east-1.amazonaws.com']
 
 
 # Application definition
@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'rest_framework',
+    
     'main',
-    'api'
+    'api',
 ]
 
 MIDDLEWARE = [
