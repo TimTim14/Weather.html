@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RenameField(
             model_name='temperature',
-            old_name='recorded_time',
+            old_name='recorded_at',
             new_name='recorded_at',
         ),
     ]

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('temperature', models.DecimalField(decimal_places=2, default=0.0, max_digits=3)),
                 ('change', models.DecimalField(decimal_places=2, default=0.0, max_digits=3)),
-                ('recorded_time', models.DateTimeField(auto_now=True)),
+                ('recorded_at', models.DateTimeField(auto_now=True)),
             ],
         ),
     ]
