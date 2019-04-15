@@ -12,4 +12,3 @@ class Temperature(models.Model):
     def fahrenheit(self):
         "Returns the temperature in fahrenheit"
         return '%f' % ((self.celsius * 9/5) +32)
-
