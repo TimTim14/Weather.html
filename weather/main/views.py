@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from api.models import Temperature
+from api import models
 
 
 def home(request):
     # Find the newest single temperature
-    temp =   Temperature.objects.order_by('recorded_at').first()
+    temp =   models.Temperature.objects.order_by('recorded_at').first()
     # Gather the total number of temperature readings gathered.
-    tcount = Temperature.objects.count()
+    tcount = models.Temperature.objects.count()
     # Find the first temperature entry recorded
-    tfirst = Temperature.objects.order_by('recorded_at').first()
+    tfirst = models.Temperature.objects.order_by('recorded_at').first()
     
     return render(request, 'home.html', {
         'temp': temp,

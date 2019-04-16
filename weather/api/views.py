@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from .models import Temperature
-from .serializers import TemperatureSerializer
+from . import models, serializers
+# . import serializers TemperatureSerializer
 
 class TemperatureList(generics.ListCreateAPIView):
     queryset = Temperature.objects.all()
@@ -9,4 +9,4 @@ class TemperatureList(generics.ListCreateAPIView):
     
 class TemperatureDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Temperature.objects.all()
-    serializer_class = TemperatureSerializer
+    serializer_class = serializers.TemperatureSerializer
