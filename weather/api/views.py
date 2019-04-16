@@ -20,9 +20,9 @@ class HumidityList(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.TemperatureSerializer
     
 class PressureList(generics.ListCreateAPIView):
-    queryset = models.Humidit.objects.all()
+    queryset = models.Humidity.objects.all()
     serializers_class = serializers.HumiditySerializer
     
 class PressureList(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Temperature.objects.all()
+    queryset = models.Temperature.objects.all()
     serializer_class = serializers.TemperatureSerializer
