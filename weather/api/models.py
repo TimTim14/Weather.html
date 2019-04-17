@@ -6,8 +6,7 @@ class Temperature(models.Model):
     recorded_at = models.DateTimeField(auto_now=True)
     
 
-def __str__(self):
-        return str(self.celsius)
+
         
 @property
 def fahrenheit(self):
@@ -19,8 +18,7 @@ class Humidity(models.Model):
     change = models.FloatField(default=0.0)
     recorded_at = models.DateTimeField(auto_now=True)
 
-def __str__(self):
-        return str(self.rh)
+
         
 class Pressure(models.Model):
     bp = models.FloatField(default=0.0)
