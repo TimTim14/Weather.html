@@ -12,11 +12,11 @@ class TemperatureSerializer(serializers.ModelSerializer):
 class HumiditySerializer(serializers.ModelSerializer):
     
     class Meta:
-        fields = ('id', 'Humidity', 'change', 'recorded_at')
+        fields = ('id', 'rh', 'change', 'recorded_at')
         model = models.Humidity
         
 class PressureSerializers(serializers.ModelSerializer):
     
     class Meta:
-        fields = ('id', 'Pressure', 'change', 'recorded_at')
+        fields = ('id', 'bp', 'change', 'recorded_at')
         model = models.Pressure 
