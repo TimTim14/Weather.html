@@ -19,13 +19,21 @@ body {
         <div class="col-md-4 text-center border  border-info text-warning">
     <div class="weather-block rounded">
     <p class="weather-heading">Temperature</p>
-    <p class="weather-item">{{ temp.farenheit|floatformat:1 }}&deg;F <span class="weather-sub">{{ temp.celsius|floatformat:1 }}&deg;C</span></p>
+    <p class="weather-item"><span class="weather-sub">{{ temp.celsius|floatformat:1 }}C &deg;</span></p>
     <p style="font-size:small">Last updated: {{ temp.recorded_at }}</p>
-    <p style="font-size:small">{{ tcount }} readings since {{ tfirst }}</p>
+    <p style="font-size:small">{{ tcount }} readings taken</p>
 </div>
 </div>
-        <div class="col-md-4 text-center border border-info text-info"><h3><u>humidity</u></h3><h1>27%</h1></div>
-        <div class="col-md-4 text-center border border-info text-success"><h3><u>time</u></h3><h1>7:32 P.M.</h1></div>
+        <div class="col-md-4 text-center border border-info text-info"><h3><u>humidity</u><p></p>
+         <span class="weather-sub">{{ Humidity.rh}} %</span>
+        </p><p style="font-size:small">Last updated: {{ temp.recorded_at }}</p>
+        <p style="font-size:small">{{ tcount }} readings taken</p></div>
+        
+        <div class="col-md-4 text-center border border-info text-success"><h3><u>Pressure</u><p class="weather-item">
+        {{ Pressure.bp}} </p>
+        <p style="font-size:small">Last updated: {{ temp.recorded_at }}</p>
+        <p style="font-size:small">{{ tcount }} readings taken</p>
+        
 </div>
     </div>
         
