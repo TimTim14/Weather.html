@@ -10,9 +10,13 @@ def home(request):
     # Find the first temperature entry recorded
     tfirst = models.Temperature.objects.order_by('recorded_at').first()
     
+    Humidity = models.Humidity.objects.order_by('recorded_at').first()
+    Pressure = models.Pressure.objects.order_by('recorded_at').first()
     return render(request, 'home.html', {
         'temp': temp,
          'tcount': tcount, 
-         'tfirst': tfirst.recorded_at}
+         'tfirst': tfirst.recorded_at,
+        'Humidity': Humidity,
+        'Pressure': Pressure}
     )
 
