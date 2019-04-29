@@ -1,6 +1,7 @@
 from rest_framework import generics
 
-from . import models, serializers
+from . import models
+from . import serializers
 # . import serializers TemperatureSerializer
 
 class TemperatureList(generics.ListCreateAPIView):
@@ -17,12 +18,12 @@ class HumidityList(generics.ListCreateAPIView):
     
 class HumidityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Humidity.objects.all()
-    serializer_class = serializers.TemperatureSerializer
+    serializer_class = serializers.HumiditySerializer
     
 class PressureList(generics.ListCreateAPIView):
     queryset = models.Pressure.objects.all()
-    serializer_class = serializers.HumiditySerializer
+    serializer_class = serializers.PressureSerializers
     
 class PressureDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Pressure.objects.all()
-    serializer_class = serializers.TemperatureSerializer
+    serializer_class = serializers.PressureSerializers
