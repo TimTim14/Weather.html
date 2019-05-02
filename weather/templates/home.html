@@ -25,12 +25,12 @@ body {
 </div>
 </div>
         <div class="col-md-4 text-center border border-info text-info"><h3><u>humidity</u><p></p>
-         <span class="weather-sub">{{Hu.Humidity}} %</span>
+         <span class="weather-sub">{{Humidity.rh}} %</span>
         </p><p style="font-size:small">Last updated: {{ temp.recorded_at }}</p>
         <p style="font-size:small">{{ tcount }} readings taken</p></div>
         
         <div class="col-md-4 text-center border border-info text-success"><h3><u>Pressure</u><p class="weather-item">
-       <span class="weather-sub">{{Pressure.Pressure}}Pa</span> </p>
+       <span class="weather-sub">{{Pressure.bp}}Pa</span> </p>
         <p style="font-size:small">Last updated: {{ temp.recorded_at }}</p>
         <p style="font-size:small">{{ tcount }} readings taken</p>
         
@@ -38,12 +38,14 @@ body {
     </div>
         
 
+<div class="container">
+
         
 <div class="container">
     <div class="row">
-        <div class="col-md-4 text-center border  border-info"><h3>24 hour Temperature recording</h3></div>
-        <div class="col-md-4 text-center border border-info"><h3>24 hour Humidity recording</h3></div>
-        <div class="col-md-4 text-center border border-info"><h3>24 hour Pressure recording</h3></div>
+        <div class="col-md-4 text-center border  border-info"><h3>24 hour Temperature</h3></div>
+        <div class="col-md-4 text-center border border-info"><h3>24 hour Temperature</h3></div>
+        <div class="col-md-4 text-center border border-info"><h3>24 hour Temperature</h3></div>
 </div>
     </div>
 
