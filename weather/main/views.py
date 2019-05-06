@@ -20,7 +20,18 @@ def home(request):
     min_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('celsius'))['celsius__min']
     tmin =  c2f(min_celsius)
    
+    max_rh = models.Humidity.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Max('rh'))['rh__max']
+    rhmax = (max_rh)
+    
+    min_rh = models.Humidity.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('rh'))['rh__min']
+    rhmin =  (min_rh)
    
+    max_bp = models.Pressure.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Max('bp'))['bp__max']
+    bpmax = (max_bp)
+    
+    min_bp = models.Pressure.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('bp'))['bp__min']
+    bpmin =  (min_bp)
+    
     tcount = models.Temperature.objects.count()
     # Find the first temperature entry recorded
     tfirst = models.Temperature.objects.order_by('recorded_at').first()
@@ -34,6 +45,10 @@ def home(request):
         'Humidity': Humidity,
         'Pressure': Pressure,
         "tmin": tmin,
-        "tmax": tmax }
+        "tmax": tmax,
+        "rhmax": rhmax,
+        "rhmin": rhmin,
+        "bpmax": bpmax,
+        "bpmin": bpmin}
     )
 
