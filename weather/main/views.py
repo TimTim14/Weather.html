@@ -14,10 +14,10 @@ def home(request):
     sometime_ago = now - timedelta(days=7)
     temp =   models.Temperature.objects.order_by('-recorded_at').first()
     
-    max_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('celsius'))
+    max_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Max('celsius'))['celsius__max']
     tmax = c2f(max_celsius)
         
-    min_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('celsius'))
+    min_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('celsius'))['celsius__min']
     tmin = c2f(min_celsius)
    
    
