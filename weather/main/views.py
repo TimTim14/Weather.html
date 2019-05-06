@@ -11,7 +11,7 @@ def c2f(celsius):
 
 def home(request):
     now = datetime.now()
-    sometime_ago = now - timedelta(days=10)
+    sometime_ago = now - timedelta(days=7)
     temp =   models.Temperature.objects.order_by('-recorded_at').first()
     
     max_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Max('celsius'))['celsius__max']
