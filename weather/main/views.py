@@ -11,14 +11,14 @@ def c2f(celsius):
 
 def home(request):
     now = datetime.now()
-    sometime_ago = now - timedelta(days=7)
+    sometime_ago = now - timedelta(days=10)
     temp =   models.Temperature.objects.order_by('-recorded_at').first()
     
     max_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Max('celsius'))['celsius__max']
     tmax = c2f(max_celsius)
-        
+    
     min_celsius = models.Temperature.objects.filter(recorded_at__range=(sometime_ago, now)).aggregate(Min('celsius'))['celsius__min']
-    tmin = c2f(min_celsius)
+    tmin =  c2f(min_celsius)
    
    
     tcount = models.Temperature.objects.count()
@@ -32,6 +32,8 @@ def home(request):
          'tcount': tcount, 
          'tfirst': tfirst.recorded_at,
         'Humidity': Humidity,
-        'Pressure': Pressure}
+        'Pressure': Pressure,
+        "tmin": tmin,
+        "tmax": tmax }
     )
 
