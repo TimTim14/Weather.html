@@ -2,8 +2,42 @@ from django.shortcuts import render
 from api import models
 
 from datetime import datetime, timedelta
-from django.db.models import Max, Min
+from django.db.models import Max, Min, F
+from datetime import datetime, timedelta
 
+from chartjs.views.lines import BaseLineChartView
+
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+class LineChartView(BaseLineChartView):
+    labels = []
+    max_list = []
+    min_list = []
+    def last_seven_days(self):
+        now = datetime.now()
+        seven_days_ago = now - timedelta(days=7)
+        
+        datas = Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        
+        for data in datas:
+            weekday = datetime.weekday(data.recorded_at)
+            print(str(data.recorded_at) + '=' + str(weekday) + '' + days[weekday])
+            if days[weekday] not in self.labels:
+                self.labels.append(days[weekday])
+        
+    def get_providers(self):
+        """ Return the names for the datasets. """
+        return ['Max', 'Min']
+        
+    def get_labels(self):
+        """ Return labels for our days. """
+        return self.labels
+    def get_data(self):
+        """ Return min/max datasets to draw. """
+        
+        self.last_seven_days()
+        
+        return [self.max_list, self.min_list]
 
 def c2f(celsius):
     return ((celsius * 9/5) + 32)
