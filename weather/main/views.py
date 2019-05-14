@@ -27,8 +27,7 @@ class LineChartView(BaseLineChartView):
         now = datetime.now()
         seven_days_ago = now - timedelta(days=7)
         
-        datas = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('fahrenheit'))
-        
+        datas = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
         
         for data in datas:
             weekday = datetime.weekday(data.recorded_at)
