@@ -4,9 +4,7 @@
 <title>Weather Station</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <style>
-body {
-    background: #0000ff
-}
+
 </style>
 </head>
 <h1 style="text-align: center"><b><u>Weather Station</u></b></h1>
@@ -48,11 +46,81 @@ body {
         <div class="col-md-4 text-center border border-info"><h3>{{bpmin}} weekly minimum {{bpmax}} weekly  maximum</h3></div>
 </div>
     </div>
+    
+   <div id="graphs" class="container graphs">
+        <div class="row"> <!-- this horizontal row will hold our weather display -->
+            <div class="col-md-4"> <!-- block 1 (left) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="tempChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/temp', function(data) {
+                var ctx = $("#tempChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+            <div class="col-md-4"> <!-- block 2 (middle) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="rhChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/rh', function(data) {
+                var ctx = $("#rhChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+            <div class="col-md-4"> <!-- block 3 (right) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="bpChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/bp', function(data) {
+                var ctx = $("#bpChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+        </div>
+    </div>    
 
 <div class="container-fluid">
 <img src="https://www.nature.com/polopoly_fs/7.26031.1431440225!/image/reduced%20HIRES%2042-52427199.jpg_gen/derivatives/landscape_630/reduced%20HIRES%2042-52427199.jpg" class="rounded mx-auto d-block alt="thunder cloud" class="img-thumbnail">
 ​</div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

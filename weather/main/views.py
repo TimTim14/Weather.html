@@ -13,17 +13,37 @@ class LineChartView(BaseLineChartView):
     labels = []
     max_list = []
     min_list = []
+    
+    def set_minmax(self, index, item):
+        if item > self.max_list[index]:
+            self.max_list[index] = item
+            
+        if item < self.min_list[index]:
+            self.min_list[index] = item
+        
+        
+        
     def last_seven_days(self):
         now = datetime.now()
         seven_days_ago = now - timedelta(days=7)
         
-        datas = Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        datas = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        datasrh = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('rh'))
+        datasbp = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('bp'))
         
         for data in datas:
             weekday = datetime.weekday(data.recorded_at)
             print(str(data.recorded_at) + '=' + str(weekday) + '' + days[weekday])
             if days[weekday] not in self.labels:
                 self.labels.append(days[weekday])
+        
+        self.max_list = [-100 for i in range(len(self.labels))]
+        self.min_list = [9999 for i in range(len(self.labels))]
+        
+        for data in datas:
+            weekday = datetime.weekday(data.recorded_at)
+            idx = self.labels.index(days[weekday])
+            self.set_minmax(idx, data.value)
         
     def get_providers(self):
         """ Return the names for the datasets. """
