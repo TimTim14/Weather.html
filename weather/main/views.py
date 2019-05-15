@@ -10,24 +10,36 @@ from chartjs.views.lines import BaseLineChartView
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 class LineChartView(BaseLineChartView):
+    type = ''
     labels = []
     max_list = []
     min_list = []
     
     def set_minmax(self, index, item):
+        if self.type == 'temp':
+            item = c2f(item)
+        
         if item > self.max_list[index]:
-            self.max_list[index] = c2f(item)
+            self.max_list[index] = item
             
         if item < self.min_list[index]:
-            self.min_list[index] = c2f(item)
+            self.min_list[index] = item
         
         
         
     def last_seven_days(self):
+        self.type = self.kwargs.get('type') ## Review on Wednesday
         now = datetime.now()
         seven_days_ago = now - timedelta(days=7)
         
-        datas = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        
+        if self.type == 'rh':
+            datas = models.Humidity.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('rh'))
+        elif self.type == 'bp':
+            datas = models.Pressure.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('bp'))
+        else:
+            datas = models.Temperature.objects.order_by('-recorded_at').filter(recorded_at__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        
         
         for data in datas:
             weekday = datetime.weekday(data.recorded_at)
